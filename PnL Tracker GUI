@@ -1,0 +1,44 @@
+#Following along the tutorial here https://coderslegacy.com/python/pyqt6-create-basic-window/
+
+from PyQt6.QtWidgets import QApplication, QVBoxLayout, QWidget, QLabel, QPushButton
+from PyQt6.QtGui import QIcon
+from PyQt6.QtCore import Qt
+import sys
+
+class Window(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.resize(1200, 900)
+        self.setWindowTitle("PnL Tracker")
+        self.setWindowIcon(QIcon("icon.jpg"))
+        
+        #initialize layout variable
+        layout = QVBoxLayout()
+        self.setLayout(layout)
+        
+        #initialize label object and position it in the center, finally add it to the layout
+        label = QLabel("The Price of ETH is: To the MOON")
+        label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(label)
+        
+        #pretend this label is a list of tokens
+        self.listlabel = QLabel("I'm a token")
+        self.listlabel.move(100, 800)
+        layout.addWidget(self.listlabel)
+        
+        #Create a button and add it to the layout
+        addbutton = QPushButton("Add token")
+        addbutton.clicked.connect(self.addtoken)
+        addbutton.move(100, 300)
+        layout.addWidget(addbutton)
+        
+    #function which adds a token
+    def addtoken(self):
+        self.listlabel.setText("You have added a new token")
+ 
+app = QApplication(sys.argv)
+window = Window()
+window.show()
+sys.exit(app.exec())
+
+
