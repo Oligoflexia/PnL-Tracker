@@ -3,8 +3,26 @@
 from cProfile import label
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import QIcon
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import QSize, QAbstractTableModel, Qt
 import sys
+
+from sqlalchemy import null
+
+class TableModel(QAbstractTableModel):
+    def __init__(self, data):
+        super(TableModel, self).__init__()
+        self._data= data
+        
+    def data(self, index, role):
+        if role == Qt.ItemDataRole.DisplayRole:
+            return self._data[index.row()][index.column()]
+        
+    def rowCount(self, index):
+        return len(self._data)
+    
+    def columnCount(self, index):
+        return len(self._data[0])
+
 
 class Window(QWidget):
     def __init__(self):
@@ -19,6 +37,18 @@ class Window(QWidget):
         #initialize all widgets
         self.addTokenButton = QPushButton("Add Token")
         self.addTokenButton.clicked.connect(self.addtoken)
+        self.addTokenButton.setFixedSize(QSize(100, 25))
+        
+        self.tokenTable = QTableView()
+        self.tokenTable.setFixedSize(QSize(525, 250))
+        
+        data = [
+            ["BTC", 1, 69000, 1000, 0], 
+            ["ETH", 32, 42069, 10000, 0], 
+            ["NANO", 5, 0.69, -100, 0]
+        ]
+        self.model = TableModel(data)
+        self.tokenTable.setModel(self.model)
         
         self.label = QLabel("The Price of ETH is: To the MOON")      
         self.listlabel = QLabel("I'm a token")
@@ -29,17 +59,18 @@ class Window(QWidget):
         
         vbox = QVBoxLayout()
         vbox.addWidget(self.addTokenButton)
-        vbox.addWidget(self.listlabel)
+        #vbox.addWidget(self.listlabel)
+        vbox.addWidget(self.tokenTable)
         
         grid.addLayout(vbox, 1, 0)
         
         #
         self.setLayout(grid)
-        self.setGeometry(0, 0, 1200, 900)
+        self.setGeometry(0, 0, 900, 600)
         
     #function which adds a token
-    def addtoken(self):
-        self.listlabel.setText("You have added a new token")
+    #def addtoken(self):
+    #    self.listlabel.setText("You have added a new token")
  
  
  
