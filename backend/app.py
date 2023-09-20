@@ -21,6 +21,11 @@ migrate = Migrate(app, db)
 from models import Asset, HistoricalPrice, Portfolio, Transaction, User
 
 # Your application routes and logic here
-
 if __name__ == '__main__':
     app.run()
+
+def create_app():
+    app = Flask(__name__)
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_path
+    db.init_app(app)
+    return app
