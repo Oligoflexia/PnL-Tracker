@@ -1,0 +1,22 @@
+Database
+---------
+
+- [ ] Insert historical data for XBT and ETH into table
+- [ ] Insert transaction data into table
+- [ ] Research db.Relationship() more closely
+
+Backend
+--------
+
+- [ ] Learn more about API to fill in daily values for OLT data
+- [ ] Implement logic for "what if" comparison to XBT.
+- [ ] Learn more about user authentication
+- [ ] Logic for functions to sum totals and other info like profit/loss
+
+
+Front-end
+----------
+
+- [ ] Figure out how to display charts
+- [ ] Buttons for CRUD operations
+

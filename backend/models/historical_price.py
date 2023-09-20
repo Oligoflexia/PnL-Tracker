@@ -2,7 +2,7 @@ from app import db
 
 class HistoricalPrice(db.Model):
     id = db.Column(db.Integer, primary_key= True)
-    asset_id = db.Column(db.Integer, db.ForeignKey('asset.id'), nullable= False)
+    asset_id = db.Column(db.String(4), db.ForeignKey('asset.ticker'), nullable= False)
     timestamp = db.Column(db.DateTime, nullable= False)
     daily_high = db.Column(db.Float, nullable=False)
     daily_low = db.Column(db.Float, nullable=False)
