@@ -1,10 +1,11 @@
 Database
 ---------
 
-- [ ] Insert historical data for XBT and ETH into table
+- [X] Insert historical data for XBT and ETH into table
 - [ ] Insert transaction data into table
 - [ ] Research db.Relationship() more closely
-
+- [ ] Think about using the timestamp+ticker as the primary key
+ 
 Backend
 --------
 
